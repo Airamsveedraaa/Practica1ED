@@ -32,6 +32,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Clasificacion.cpp" />
+		<Unit filename="Clasificacion.h" />
+		<Unit filename="Comun.h" />
+		<Unit filename="Torneo.cpp" />
+		<Unit filename="Torneo.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
