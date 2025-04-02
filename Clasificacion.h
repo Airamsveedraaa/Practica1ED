@@ -1,8 +1,7 @@
 #ifndef CLASIFICACION_H_INCLUDED
 #define CLASIFICACION_H_INCLUDED
-#include "comun.h"
 
-//Declaracion estructura Jugador
+//Definicion estructura Jugador
 struct Jugador
 {
     int indice;
@@ -10,16 +9,13 @@ struct Jugador
 };
 
 
-//Declaracion clase clasificacion
+//Declaracion clase Clasificacion
 class Clasificacion
 {
-
-    Jugador *elementos; //puntero a estructura, lo almacenaremos en forma de vector
-    int Jugadores; //Numero de jugadores efectivos
-    int tamano; //Tamaño del vector que contiene a los jugadores
-
+    Jugador *elementos; //puntero a objeto tipo jugador, seran almacenados como un vector
+    int Jugadores;      //Numero de jugadores efectivos
+    int tamano;         //tamaño del vector que contiene a los jugadores
 public:
-
     Clasificacion();
     void anadirjugador(Jugador j);
     void eliminar(int i);
@@ -28,7 +24,5 @@ public:
     int numjugadores();
     void ordenar();
     ~Clasificacion();
-
 };
-
 #endif // CLASIFICACION_H_INCLUDED

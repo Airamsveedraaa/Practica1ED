@@ -1,10 +1,8 @@
-#ifndef DEFINICIONES_H_INCLUDED
-#define DEFINICIONES_H_INCLUDED
+#ifndef COMUN_H_INCLUDED
+#define COMUN_H_INCLUDED
 #define SALTO 4
 #define PAR 72
 #define N 10
-#include <fstream> //Manejo de ficheros
-
 typedef char cadena[30];
 
 
