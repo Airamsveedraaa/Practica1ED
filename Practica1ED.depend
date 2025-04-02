@@ -1,7 +1,12 @@
 # depslib dependency file v1.0
-1743604061 source:c:\users\airam\desktop\practica1ed\clasificacion.cpp
+1743604442 source:c:\users\airam\desktop\practica1ed\clasificacion.cpp
+	"Clasificacion.h"
+	"Comun.h"
+	<iostream>
 
-1584209020 source:c:\users\airam\desktop\practica1ed\main.cpp
+1743604757 source:c:\users\airam\desktop\practica1ed\main.cpp
+	"Torneo.h"
+	"Clasificacion.h"
 	<iostream>
 
 1743604276 source:c:\users\airam\desktop\practica1ed\torneo.cpp
