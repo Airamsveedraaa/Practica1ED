@@ -72,12 +72,10 @@ void Torneo::crearFichero(char nombreFichero[])
         fichero.open(nombreFichero, ios::binary | ios::in | ios::out); //abrirlo normal para usarlo en el programa
         numGolfistas=0;
         fichero.write((char*)&numGolfistas,sizeof(int));
-        cout << "Fichero creado" << endl;
     }
     else
     {
         fichero.read((char*)&numGolfistas,sizeof(int));
-        cout << "Fichero ya existente" << endl;
     }
     strcpy(nomFichero,nombreFichero);
 }
@@ -87,48 +85,56 @@ void Torneo::mostrar(float hdcp)
 {
     Golfista g;
     fichero.seekg(sizeof(int),ios::beg);
-    if(hdcp!=-1)
+    if(numGolfistas==0)
     {
-        fichero.seekg(0,ios::beg);
-        fichero.read((char*)&numGolfistas,sizeof(int));
-        cout << "Numero de golfistas inscritos: " << numGolfistas << endl;
-        fichero.seekg(sizeof(int),ios::beg);
-        cout << "Mostrando golfistas con handicap: " << hdcp << endl;
-        for(int i=0; i<numGolfistas; i++)
-        {
-            fichero.read((char*)&g,sizeof(Golfista));
-            if(g.handicap==hdcp)
-            {
-                cout << "Golfista " << i + 1 << ":" << endl;
-                cout << "\n  Licencia: " << g.licencia << endl;
-                cout << "\n  Handicap: " << g.handicap << endl;
-                cout << "\n  Nombre: " << g.nombre << endl;
-                cout << "\n  Apellidos: " << g.apellidos << endl;
-                cout << "\n  Golpes: " << g.golpes << endl;
-                cout << "\n  Resultado: " << g.resultado << endl;
-            }
-        }
+        cout << "No hay golfistas para mostrar" << endl;
     }
     else
     {
-        fichero.seekg(0,ios::beg);
-        fichero.read((char*)&numGolfistas,sizeof(int));
-        cout << "Numero de golfistas: " << numGolfistas << endl;
-        fichero.seekg(sizeof(int),ios::beg);
-        for(int i=0; i<numGolfistas; i++)
+        if(hdcp!=-1)
         {
-            fichero.read((char*)&g,sizeof(Golfista));
-            cout << "Golfista " << i + 1 << ":" << endl;
-            cout << "  Licencia: " << g.licencia << endl;
-            cout << "  Handicap: " << g.handicap << endl;
-            cout << "  Nombre: " << g.nombre << endl;
-            cout << "  Apellidos: " << g.apellidos << endl;
-            cout << "  Golpes: " << g.golpes << endl;
-            cout << "  Resultado: " << g.resultado << endl;
+            fichero.seekg(0,ios::beg);
+            fichero.read((char*)&numGolfistas,sizeof(int));
+            cout << "Numero de golfistas inscritos: " << numGolfistas << endl;
+            fichero.seekg(sizeof(int),ios::beg);
+            cout << "Mostrando golfistas con handicap: " << hdcp << endl;
+            for(int i=0; i<numGolfistas; i++)
+            {
+                fichero.read((char*)&g,sizeof(Golfista));
+                if(g.handicap==hdcp)
+                {
+                    cout << "Golfista " << i + 1 << ":" << endl;
+                    cout << "\n  Licencia: " << g.licencia << endl;
+                    cout << "\n  Handicap: " << g.handicap << endl;
+                    cout << "\n  Nombre: " << g.nombre << endl;
+                    cout << "\n  Apellidos: " << g.apellidos << endl;
+                    cout << "\n  Golpes: " << g.golpes << endl;
+                    cout << "\n  Resultado: " << g.resultado << endl;
+                }
+            }
         }
-    }
+        else
+        {
+            fichero.seekg(0,ios::beg);
+            fichero.read((char*)&numGolfistas,sizeof(int));
+            cout << "Numero de golfistas: " << numGolfistas << endl;
+            fichero.seekg(sizeof(int),ios::beg);
+            for(int i=0; i<numGolfistas; i++)
+            {
+                fichero.read((char*)&g,sizeof(Golfista));
+                cout << "Golfista " << i + 1 << ":" << endl;
+                cout << "  Licencia: " << g.licencia << endl;
+                cout << "  Handicap: " << g.handicap << endl;
+                cout << "  Nombre: " << g.nombre << endl;
+                cout << "  Apellidos: " << g.apellidos << endl;
+                cout << "  Golpes: " << g.golpes << endl;
+                cout << "  Resultado: " << g.resultado << endl;
+            }
+        }
 
+    }
 }
+
 
 Golfista Torneo::consultar(int posicion)
 {
