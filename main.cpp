@@ -18,35 +18,45 @@ int main()
     TorneoAux r;
     cadena nombreTorneo, nombreFichero;
 
-    fstream f("Torneos.dat", ios::binary | ios::in | ios::out);
-    if (f.fail())
+     fstream fTorneo("TORNEOS.dat", ios::binary | ios::in);
+    fTorneo.seekg(0, ios::beg);
+    if(!fTorneo.fail())
     {
-        f.clear();
-        f.close();
-        f.open("Torneos.dat", ios::binary | ios::out);
-        f.close();
-        f.open("Torneos.dat", ios::binary | ios::in | ios::out);
+        cadena nombre, fichero;
+        TorneoAux r;
+
+        fTorneo.read((char*)&r, sizeof(TorneoAux));
+        while(!fTorneo.eof())
+        {
+            t[nT].crearFichero(r.Nfichero);
+            t[nT].putNomTorneo(r.nTorneo);
+            nT++;
+
+            fTorneo.read((char*)&r, sizeof(TorneoAux));
+        }
     }
     else
     {
-        f.seekg(0,ios::beg);
+        fTorneo.close();
+        fTorneo.open("TORNEOS.dat", ios::binary | ios::out);
+        TorneoAux r;
 
-        f.read((char*)&r, sizeof(TorneoAux));
-        while (!f.eof())
-        {
-            t[nT].crearFichero(r.Nfichero);
-            t[nT].putNumGolfistas(r.nG);
-            t[nT].putNomFichero(r.Nfichero);
-            t[nT].putNomTorneo(r.nTorneo);
-            nT++;
-            f.read((char*)&r, sizeof(TorneoAux));
-        }
+        t[nT].crearFichero("AUDI.dat");
+        t[nT].putNomTorneo("AUDI");
+        r.nG = t[nT].getNumGolfistas();
+        t[nT].getNomFichero(r.Nfichero);
+        t[nT].getNomTorneo(r.nTorneo);
+        fTorneo.write((char*)&r, sizeof(TorneoAux));
+       nT++;
 
 
-        if(f.fail())
-            f.clear();
+
+
     }
-    f.close();
+
+    if(fTorneo.fail())
+        fTorneo.clear();
+    fTorneo.close();
     do
     {
         cout << "CLUB DE GOLF" << "\n" ;
@@ -92,7 +102,7 @@ int main()
             }
             else
             {
-                f.open("Torneos.dat", ios::binary | ios::in | ios::out);
+                fTorneo.open("Torneos.dat", ios::binary | ios::in | ios::out);
                 cout << "Introduzca el fichero que almacenara la informacion: " << endl;
                 cin >> r.Nfichero;
 
@@ -104,10 +114,10 @@ int main()
 
                 r.nG = t[nT].getNumGolfistas();
 
-                f.seekp(0,ios::end);
-                f.write((char*)&r,sizeof(TorneoAux));
+                fTorneo.seekp(0,ios::end);
+                fTorneo.write((char*)&r,sizeof(TorneoAux));
                 nT++;
-                f.close();
+                fTorneo.close();
                 cout << "INFORMACION DEL CLUB ACTUALIZADA: " << endl;
                 cout << "Torneos:" << nT << endl;
                 for (int i = 0; i < nT; i++)
@@ -204,7 +214,7 @@ int main()
         }
     }
     while(opc!=4);
-    f.close();
+    fTorneo.close();
 
     return 0;
 }
