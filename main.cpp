@@ -163,7 +163,7 @@ int main()
                         {
 
                         case 1:
-                            int handicap;
+                            float handicap;
                             cout << "Introduzca el handicap de los golfistas a mostrar (-1 si quiere ver todos los golfistas) : " << endl;
                             cin >> handicap;
                             t[OpcTorneo-1].mostrar(handicap);
@@ -172,16 +172,19 @@ int main()
                         case 2:
                             cadena nombre,apellidos,licencia;
                             Golfista golfista1;
-                            golfista1.golpes=0;
-                            golfista1.resultado=0;
-                            cout << "Introduzca el nombre del golfista: " << endl;
-                            cin >> golfista1.nombre;
-                            cout << "Introduzca los apellidos del golfista: " << endl;
-                            cin >> golfista1.apellidos;
-                            cout << "Introduzca la licencia del golfista: " << endl;
+                            cout << "Datos del golfista: " << endl;
+                            cout << "Licencia: " << endl;
                             cin >> golfista1.licencia;
-                            cout << "Introduzca el handicap del golfista: " << endl;
+                            cout << "Handicap: " << endl;
                             cin >> golfista1.handicap;
+                            cin.ignore();
+                            cout << "Nombre: " << endl;
+                            cin.getline(golfista1.nombre,30);
+                            cout << "Apellidos: " << endl;
+                            cin.ignore();
+                            cin.getline(golfista1.apellidos,30);
+                            golfista1.golpes=0;
+                            golfista1.resultado=0; //golpes y resultado inicialmente en 0
                             t[OpcTorneo-1].insertar(golfista1);
                         }
                     }
