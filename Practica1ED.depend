@@ -26,3 +26,30 @@
 
 1743604431 c:\users\airam\desktop\practica1ed\clasificacion.h
 
+1743795658 source:c:\users\user\onedrive\escritorio\practica1ed\clasificacion.cpp
+	"Clasificacion.h"
+	"Comun.h"
+	<iostream>
+
+1743795658 c:\users\user\onedrive\escritorio\practica1ed\clasificacion.h
+
+1743795658 c:\users\user\onedrive\escritorio\practica1ed\comun.h
+
+1743795658 source:c:\users\user\onedrive\escritorio\practica1ed\main.cpp
+	"Torneo.h"
+	"Clasificacion.h"
+	<iostream>
+
+1743795658 c:\users\user\onedrive\escritorio\practica1ed\torneo.h
+	"Comun.h"
+	<fstream>
+
+1743796887 source:c:\users\user\onedrive\escritorio\practica1ed\torneo.cpp
+	"Torneo.h"
+	"Clasificacion.h"
+	<cstring>
+	<fstream>
+	<iostream>
+	<cstdlib>
+	<ctime>
+

@@ -9,11 +9,9 @@
 using namespace std;
 Torneo::Torneo()
 {
-    fstream fichero;
     numGolfistas=0;
     strcpy(nomFichero,"");
     strcpy(nomTorneo,"");
-
 }
 
 int Torneo::getNumGolfistas()
@@ -54,15 +52,15 @@ void Torneo::putNomTorneo(cadena nombre)
 void Torneo::putNomFichero(cadena nombre)
 {
 
-
     strcpy(nomFichero,nombre);
 
 }
 
 void Torneo::crearFichero(char nombreFichero[])
 {
+    strcpy(nomFichero,nombreFichero);
 
-    fichero.open(nombreFichero, ios::binary | ios::in | ios::out );
+    fichero.open(nombreFichero, ios::binary | ios::in | ios::out);
     if(fichero.fail())
     {
         fichero.clear();
@@ -71,13 +69,18 @@ void Torneo::crearFichero(char nombreFichero[])
         fichero.close(); //abrirlo en modo escritura para forzar creacion del fichero
         fichero.open(nombreFichero, ios::binary | ios::in | ios::out); //abrirlo normal para usarlo en el programa
         numGolfistas=0;
-        fichero.write((char*)&numGolfistas,sizeof(int));
+        fichero.seekp(0, ios::beg);
+        fichero.write((char*)&numGolfistas, sizeof(int));
     }
     else
     {
+        fichero.seekg(0, ios::beg);
         fichero.read((char*)&numGolfistas,sizeof(int));
     }
-    strcpy(nomFichero,nombreFichero);
+
+
+    if(fichero.fail())
+        cout<<"Error fichero.fail() crearFichero "<<nombreFichero<<endl;
 }
 
 
@@ -86,7 +89,7 @@ void Torneo::mostrar(float hdcp)
     if(fichero.fail())
     {
 
-        cout << "Error" << endl;
+        cout << "Error fichero.fail() mostrar" << endl;
     }
 
     else
@@ -142,8 +145,7 @@ Golfista Torneo::consultar(int posicion)
 
     if(fichero.fail())
     {
-
-        cout << "Error" << endl;
+        cout << "Error fichero.fail() consultar" << endl;
     }
 
     else
@@ -168,7 +170,7 @@ int Torneo::buscar(cadena licencia)
     if(fichero.fail())
     {
 
-        cout << "Error" << endl;
+        cout << "Error fichero.fail() buscar" << endl;
     }
 
     else
@@ -199,19 +201,14 @@ void Torneo::insertar(Golfista g)
 {
     if(fichero.fail())
     {
-        cout << "Error" << endl;
+        cout << "Error fichero.fail() insertar" << endl;
     }
-
     else
     {
-
         if(buscar(g.licencia)!=-1)
         {
-
             cout << "Golfista ya existente" << endl;
-
         }
-
         //Ordenar golfistas por handicap
         else
         {
@@ -220,6 +217,7 @@ void Torneo::insertar(Golfista g)
             bool encontrado = false;
             while (i < numGolfistas && !encontrado)
             {
+                fichero.seekg(sizeof(int), ios::beg);
                 fichero.read((char*)&aux, sizeof(Golfista));
                 i++;
                 if (g.handicap < aux.handicap)
@@ -260,7 +258,7 @@ void Torneo::modificar(Golfista c, int posicion)
 {
     if(fichero.fail())
     {
-        cout << "Error" << endl;
+        cout << "Error fichero.fail() modificar" << endl;
     }
 
     else
@@ -293,7 +291,7 @@ void Torneo::eliminar(int posicion)
 
     if(fichero.fail())
     {
-        cout << "Error" << endl;
+        cout << "Error fichero.fail() eliminar" << endl;
     }
 
     else
@@ -327,7 +325,7 @@ void Torneo::Clasificar()
 
     if(fichero.fail())
     {
-        cout << "Error" << endl;
+        cout << "Error fichero.fail() clasificar" << endl;
     }
 
     else
@@ -435,8 +433,6 @@ void Torneo::Clasificar()
 
 Torneo::~Torneo()
 {
-
     fichero.close();
-
 }
 
