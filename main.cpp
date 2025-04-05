@@ -213,7 +213,6 @@ int main()
                         cout << "Nombre: " << endl;
                         cin.getline(golfista1.nombre,30);
                         cout << "Apellidos: " << endl;
-                        cin.ignore();
                         cin.getline(golfista1.apellidos,30);
                         golfista1.golpes=0;
                         golfista1.resultado=0; //golpes y resultado inicialmente en 0
@@ -281,6 +280,34 @@ int main()
                         break;
                     }
 
+                    case 5:
+                        {
+                            cadena licencia;
+                            Golfista g;
+                            cout << "Introduzca la licencia del golfista a eliminar: " << endl;
+                            cin >> licencia;
+
+                            int pos=t[OpcTorneo-1].buscar(licencia);
+                            if(pos==-1){
+                                cout << "No existe ningun golfista con esa licencia" << endl;
+                            }
+
+                            else{
+
+                                t[OpcTorneo-1].eliminar(pos);
+                            }
+
+                            break;
+                        }
+
+                    case 6:
+                        {
+                            t[OpcTorneo-1].Clasificar();
+
+                            break;
+
+                        }
+
                     case 7:
                         cout << "Saliendo del menu..." << endl;
                         break;
@@ -293,10 +320,6 @@ int main()
                 }
                 while(OpcMenuTorneo !=7);
             }
-
-
-
-
 
         case 4:
             cout << "Saliendo del menu..." << endl;

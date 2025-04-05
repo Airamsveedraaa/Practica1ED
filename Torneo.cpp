@@ -293,8 +293,6 @@ void Torneo::eliminar(int posicion)
             fichero.seekp(0, ios::beg);
             fichero.write((char*)&numGolfistas, sizeof(int));
             cout << "Golfista eliminado con exito" << endl;
-            cout << "Mostrando datos actualizados: " << endl;
-            mostrar(-1); // Mostrar todos los datos actualizados para comprobar que se ha eliminado correctamente
         }
         else
         {
