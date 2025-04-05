@@ -58,6 +58,16 @@ void Torneo::putNomFichero(cadena nombre)
 
 void Torneo::crearFichero(char nombreFichero[])
 {
+
+    /*El método crearFichero del objeto Torneo será el método en el que se debe crear el fichero
+para comenzar a inscribir jugadores o abrir el fichero ya creado para seguir inscribiendo
+jugadores o gestionar las inscripciones (mostrarlas, modificarlas, eliminarles), así como
+simular la celebración del torneo y mostrar los resultados del torneo. Si el fichero
+nombrefichero no existe se procede a crear el fichero vacío (asignando y guardando el valor
+de 0 para el número de Golfistas). Si el fichero existe se abre para poder gestionarlo. */
+
+
+
     strcpy(nomFichero,nombreFichero);
 
     fichero.open(nombreFichero, ios::binary | ios::in | ios::out);
@@ -86,6 +96,11 @@ void Torneo::crearFichero(char nombreFichero[])
 
 void Torneo::mostrar(float hdcp)
 {
+
+/*El método mostrar se encarga de mostrar por pantalla los datos de todas las inscripciones de
+un determinado torneo que tengan el mismo hándicap pasado por parámetro. Si el valor pasado
+es -1 se mostrará por pantalla la información de todos los golfistas del fichero*/
+
 
     if(numGolfistas==0){
         cout << "No hay golfistas para mostrar" << endl;
@@ -147,6 +162,11 @@ void Torneo::mostrar(float hdcp)
 
 Golfista Torneo::consultar(int posicion)
 {
+
+    /*El método consultar devuelve el golfista cuya posición se pasa por parámetro. La posición
+del primer golfista en el fichero es la 1. */
+
+
 if(fichero.fail())
     {
 
@@ -165,6 +185,13 @@ if(fichero.fail())
 
 int Torneo::buscar(cadena licencia)
 {
+
+
+    /*El método buscar devuelve la posición en el fichero del golfista cuya licencia se pasa como
+parámetro, si se encuentra, y en caso contrario devuelve el valor -1, para indicar que no existe
+ningún golfista con esa licencia en el fichero*/
+
+
     if(fichero.fail())
     {
 
@@ -196,6 +223,14 @@ int Torneo::buscar(cadena licencia)
 
 void Torneo::insertar(Golfista g)
 {
+
+
+    /*El método insertar realiza la inserción de los datos de un nuevo golfista, teniendo en cuenta
+que los golfistas deben continuar en el fichero ordenados por hándicap, de menor a mayor.
+Habrá que controlar que no se insertan golfistas con la misma licencia de los ya inscritos en
+un mismo torneo.*/
+
+
     if(fichero.fail())
     {
         cout << "Error fichero.fail() insertar" << endl;
@@ -210,32 +245,34 @@ void Torneo::insertar(Golfista g)
         else
         {
             Golfista aux;
-            int i = 0;
-            bool encontrado = false;
-            while (i < numGolfistas && !encontrado)
+            int pos = 0;
+            bool insertado = false;
+          // Buscar posición correcta
+            fichero.seekg(sizeof(int), ios::beg);
+            while(pos < numGolfistas && !insertado)
             {
-                fichero.seekg(sizeof(int), ios::beg);
                 fichero.read((char*)&aux, sizeof(Golfista));
-                i++;
-                if (g.handicap < aux.handicap)
+                if(g.handicap < aux.handicap)
                 {
-                    encontrado = true;
-                    for(int j=numGolfistas-1; j>=i ; j--)
-                    {
-                        fichero.seekg(sizeof(int)+sizeof(Golfista)*i,ios::beg);
-                        fichero.read((char*)&aux,sizeof(Golfista));
-                        fichero.write((char*)&aux,sizeof(Golfista));
-                    }
-                    fichero.seekp(sizeof(int)+sizeof(Golfista)*(i-1), ios::beg);
-                    fichero.write((char*)&g, sizeof(Golfista));
+                    insertado = true;
+                }
+                else
+                {
+                    pos++;
                 }
             }
 
-            if(!encontrado)
+            // Desplazar elementos desde la posición encontrada
+            for(int i = numGolfistas; i > pos; i--)
             {
-                fichero.seekp(sizeof(int)+sizeof(Golfista)*i,ios::beg);
-                fichero.write((char*)&g,sizeof(Golfista));
+                Golfista temp = consultar(i); // golfista en posición i-1
+                fichero.seekp(sizeof(int) + i * sizeof(Golfista), ios::beg);
+                fichero.write((char*)&temp, sizeof(Golfista));
             }
+
+            // Insertar nuevo golfista
+            fichero.seekp(sizeof(int) + pos * sizeof(Golfista), ios::beg);
+            fichero.write((char*)&g, sizeof(Golfista));
             numGolfistas++;
             fichero.seekp(0,ios::beg);
             fichero.write((char*)&numGolfistas,sizeof(int));
@@ -253,6 +290,13 @@ void Torneo::insertar(Golfista g)
 
 void Torneo::modificar(Golfista c, int posicion)
 {
+
+    /*El método modificar se encarga de actualizar los datos de un golfista ya inscrito. Se pasarán
+los nuevos datos del golfista y la posición donde se encuentra. Si el golfista pasado no
+estuviera inscrito en el torneo, se mostraría un mensaje indicándolo. Nota: No se admite en
+la modificación cambiar el hándicap del golfista.*/
+
+
     if(fichero.fail()){
         cout << "Error en el fichero. modificar()" << endl;
 
@@ -271,6 +315,12 @@ void Torneo::modificar(Golfista c, int posicion)
 
 void Torneo::eliminar(int posicion)
 {
+
+    /*El método eliminar realiza la eliminación de los datos del golfista cuya posición se pasa por
+parámetro. Si la posición no existe, se mostraría un mensaje de error. Para eliminar una
+inscripción de un golfista del fichero, se desplazan una posición a la izquierda todas las
+inscripciones a continuación de la eliminada (para no dejar huecos).*/
+
 
     if(fichero.fail())
     {
@@ -303,6 +353,13 @@ void Torneo::eliminar(int posicion)
 
 void Torneo::Clasificar()
 {
+
+   /* El método Clasificar se encarga de realizar una simulación de la celebración del torneo
+con los golfistas que se han inscrito. Su detalle se explica más adelante. Este método simulará
+la celebración del torneo y mostrará por pantalla la clasificación final con los datos de los
+golfistas, junto con el número de golpes y los resultados obtenidos.*/
+
+
 
     if(fichero.fail())
     {
