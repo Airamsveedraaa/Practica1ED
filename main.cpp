@@ -226,20 +226,24 @@ int main()
                     {
 
 
-                        Golfista h;
+                        cadena licencia;
                         cout << "Introduzca la licencia del golfista a consultar: " << endl;
-                        cin >> h.licencia;
+                        cin >> licencia;
 
-                        int pos= t[nT].buscar(h.licencia);
-                        if(pos==-1)
+                        int pos= t[OpcTorneo-1].buscar(licencia);
+                        if(pos!=-1)
                         {
-                            cout << "No existe ningun golfista con esa licencia" << endl;
+                            Golfista h=t[OpcTorneo-1].consultar(pos);
+                            cout << "\nDatos del golfista:" << endl;
+                            cout << "Licencia: " << h.licencia << endl;
+                            cout << "Nombre: " << h.nombre << endl;
+                            cout << "Apellidos: " << h.apellidos << endl;
+                            cout << "Handicap: " << h.handicap << endl;
                         }
 
                         else
                         {
-
-                            t[nT].consultar(pos);
+                            cout << "No existe ningun golfista con esa licencia." << endl;
                         }
 
                         break;
@@ -249,17 +253,12 @@ int main()
                     {
 
 
-                        Golfista j;
                         cadena nombre,apellidos,licencia;
 
-                        cout << "Introduzca los datos del golfista a modificar: "
-                             << "\nLicencia: " << endl;
-                        cin >> j.licencia;
-                        cout << "\nNombre: " << endl;
-                        cin >> j.nombre;
-                        cout << "\nApellidos: " << endl;
-                        cin >> j.apellidos;
-                        int pos=t[OpcTorneo -1].buscar(j.licencia);
+                        cout << "Introduzca la licencia del golfista a modificar: " << endl;
+                        cin >> licencia;
+
+                        int pos=t[OpcTorneo -1].buscar(licencia);
                         if(pos==-1)
                         {
                             cout << "No existe ningun golfista con esa licencia" << endl;
@@ -267,6 +266,15 @@ int main()
 
                         else
                         {
+                            Golfista j=t[OpcTorneo-1].consultar(pos);
+
+                            cout << "Introduzca los nuevos datos del golfista: " << endl;
+                            cout << "Licencia: " << endl;
+                            cin >> j.licencia;
+                            cout << "Nombre: " << endl;
+                            cin >> j.nombre;
+                            cout << "Apellidos: " << endl;
+                            cin >> j.apellidos;
                             t[OpcTorneo-1].modificar(j,pos);
                         }
 

@@ -86,6 +86,11 @@ void Torneo::crearFichero(char nombreFichero[])
 
 void Torneo::mostrar(float hdcp)
 {
+
+    if(numGolfistas==0){
+        cout << "No hay golfistas para mostrar" << endl;
+    }
+
     if(fichero.fail())
     {
 
@@ -142,27 +147,20 @@ void Torneo::mostrar(float hdcp)
 
 Golfista Torneo::consultar(int posicion)
 {
-
-    if(fichero.fail())
+if(fichero.fail())
     {
+
         cout << "Error fichero.fail() consultar" << endl;
     }
+            Golfista g;
 
-    else
-    {
-        Golfista g;
-        fichero.seekg(0,ios::beg); //posicionado al inicio
-        int pos=sizeof(int) + (posicion-1)*sizeof(Golfista); //posicion que queremos buscar
-        fichero.seekg(pos,ios::beg); //posicion buscada para leer
-        fichero.read((char*)&g,sizeof(Golfista)); //lectura golfista buscado
-        cout << "Datos del golfista ubicado en la posicion " << posicion << " :" << endl;
-        cout << "  Licencia: " << g.licencia << endl;
-        cout << "  Handicap: " << g.handicap << endl;
-        cout << "  Nombre: " << g.nombre << endl;
-        cout << "  Apellidos: " << g.apellidos << endl;
-        cout << "  Golpes: " << g.golpes << endl;
-        cout << "  Resultado: " << g.resultado << endl;
+
+    if(!fichero.fail()){
+        fichero.seekg(sizeof(int) +(posicion-1)*sizeof(Golfista),ios::beg); //posicionamos para leer en la posicion pasada por parametro
+        fichero.read((char*)&g,sizeof(Golfista));
     }
+
+    return g;
 }
 
 int Torneo::buscar(cadena licencia)
@@ -183,13 +181,12 @@ int Torneo::buscar(cadena licencia)
         while(i<numGolfistas && !encontrado)
         {
             fichero.read((char*)&g,sizeof(Golfista));
+            i++;
             if(strcmp(g.licencia,licencia)==0)
             {
-                pos=i+1;
+                pos=i;
                 encontrado=true;
             }
-            else
-                i++;
 
         }
         return pos;
@@ -256,33 +253,19 @@ void Torneo::insertar(Golfista g)
 
 void Torneo::modificar(Golfista c, int posicion)
 {
-    if(fichero.fail())
-    {
-        cout << "Error fichero.fail() modificar" << endl;
+    if(fichero.fail()){
+        cout << "Error en el fichero. modificar()" << endl;
+
     }
 
-    else
-    {
-        if(posicion > 0 && posicion < numGolfistas) //quiere decir que se encuentra al golfista
-        {
-            Golfista golfistaexistente;
-            fichero.seekg(sizeof(int) + posicion * sizeof(Golfista),ios::beg); //me desplazo desde el inicio hacia la posicion que quiero modificar??
-            fichero.read((char*)&golfistaexistente,sizeof(Golfista));
-            cout << "Licencia: " << endl;
-            cin >> golfistaexistente.licencia;
-            cout << "Nombre: " << endl;
-            cin >> golfistaexistente.nombre;
-            cout << "Apellidos: " << endl;
-            cin >> golfistaexistente.apellidos;     //escribo informacion en esa posicion para modificar los atributos del golfista�?
-            fichero.seekp(sizeof(int) + posicion * sizeof(Golfista),ios::beg);
-            fichero.write((char*)&golfistaexistente,sizeof(Golfista));
-            cout << "Datos del golfista modificados correctamente" << endl;
-            cout << "Mostrando datos actualizados: " << endl;
-            mostrar(-1);
-        }
-        else
-            cout << "Golfista no encontrado" << endl;
+    else if(posicion>numGolfistas || posicion<1){
+        cout << "El golfista no esta inscrito en el torneo" << endl;
+    }
 
+    else{
+
+        fichero.seekp(sizeof(int)+ (posicion-1)*sizeof(Golfista),ios::beg);
+        fichero.write((char*)&c, sizeof(Golfista));
     }
 }
 
