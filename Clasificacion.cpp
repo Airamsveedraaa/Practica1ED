@@ -7,7 +7,7 @@ Clasificacion::Clasificacion()
 {
 
     tamano=0; //tama�o inicial
-    elementos=nullptr; //no tiene memoria de primeras
+    elementos=new Jugador[tamano]; //no tiene memoria de primeras
     Jugadores=0;
 
 }
@@ -22,6 +22,9 @@ tabla a un tamaño igual al anterior + SALTO (siendo SALTO una constante definid
 programa, con valor de 4, con el propósito de no tener que redimensionar la tabla con cada
 inserción, sino cada “SALTO” inserciones). */
 
+    if(elementos==nullptr){
+        cout << "Error,anadirjugador()" << endl;
+    }
 
 
     if(Jugadores==tamano)
@@ -47,6 +50,10 @@ void Clasificacion::eliminar(int i)
     /*El método eliminar, eliminará de la tabla dinámica el Jugador que ocupe la posición i, pasada
 como parámetro, en la tabla. */
 
+      if (elementos==nullptr){
+        cout<<"Error en eliminar clasificacion"<<endl;
+    }
+
 
     if(i < 0 || i>Jugadores)
     {
@@ -68,8 +75,6 @@ posición pasada. */
 
 
 
-    Jugador j;
-
     if(n<0 || n> Jugadores)
     {
         cout << "Error, posicion invalida" << endl;
@@ -77,9 +82,7 @@ posición pasada. */
 
     else
     {
-        cout << "Datos del jugador " << n << " :" << endl;
-        cout << "\n" << j.indice << endl;
-        cout << "\n" << j.resultado << endl;
+        return elementos[n];
     }
 
 }
@@ -112,20 +115,31 @@ int Clasificacion::numjugadores()
 
 void Clasificacion::ordenar()
 {
+
     /*El método ordenar ordena la tabla dinámica elementos por el algoritmo burbuja. */
 
+     if (elementos==nullptr){
+        cout<<"Error en ordenar clasificacion"<<endl;
+    }
 
 
-    for(int i=0; i<Jugadores; i++)
+    for(int i=0; i<Jugadores-1; i++)
     {
-        for(int j=i+1; j<Jugadores; j++)
+        for(int j=0; j<Jugadores-i-1; j++)
         {
-            if (elementos[i].resultado > elementos[j].resultado)
+            if (elementos[j].resultado > elementos[j+1].resultado)
             {
-                Jugador temporal=elementos[i];
-                elementos[i]=elementos[j];
-                elementos[j]=temporal;
+                Jugador temporal=elementos[j];
+                elementos[j]=elementos[j+1];
+                elementos[j+1]=temporal;
             }
         }
     }
+}
+
+Clasificacion::~Clasificacion(){
+
+delete [] elementos;
+
+
 }

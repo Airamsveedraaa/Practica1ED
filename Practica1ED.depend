@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1743879387 source:c:\users\airam\desktop\practica1ed\clasificacion.cpp
+1744060063 source:c:\users\airam\desktop\practica1ed\clasificacion.cpp
 	"Clasificacion.h"
 	"Comun.h"
 	<iostream>
@@ -9,7 +9,7 @@
 	"Clasificacion.h"
 	<iostream>
 
-1743879875 source:c:\users\airam\desktop\practica1ed\torneo.cpp
+1744058993 source:c:\users\airam\desktop\practica1ed\torneo.cpp
 	"Torneo.h"
 	"Clasificacion.h"
 	<cstring>
