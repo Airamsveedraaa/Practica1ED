@@ -372,7 +372,6 @@ void Torneo:: Clasificar(){
     }
     srand(time(0));
 
-<<<<<<< HEAD
     Clasificacion clasif;
 
     cout<<"Resultados del torneo: "<<nomTorneo<<endl;
@@ -384,35 +383,6 @@ void Torneo:: Clasificar(){
         fichero.seekp(sizeof(int) +i*sizeof(Golfista), ios::beg);
         fichero.read((char*)&g, sizeof(Golfista));
 
-=======
-    /* El método Clasificar se encarga de realizar una simulación de la celebración del torneo
-    con los golfistas que se han inscrito. Su detalle se explica más adelante. Este método simulará
-    la celebración del torneo y mostrará por pantalla la clasificación final con los datos de los
-    golfistas, junto con el número de golpes y los resultados obtenidos.*/
-
-    if(fichero.fail()){
-        cout<<"Error en fichero.clasificar()"<<endl;
-    }
-    fichero.clear();
-    fichero.seekp(0,ios::beg);
-    fichero.read((char*)&numGolfistas, sizeof(int));
-    if (numGolfistas==0){
-        cout<<"No hay golfistas inscritos"<<endl;
-    }
-    srand(time(0));
-
-    Clasificacion clasif;
-
-    cout<<"Resultados del torneo: "<<nomTorneo<<endl;
-    cout << "Puesto\tNombre\tApellidos\tHandicap\tGolpes\tResultado"<<endl;
-    cout<<"----------------------------------------------------------------------"<<endl;
-
-    for(int i=0; i<numGolfistas; i++){
-        Golfista g;
-        fichero.seekp(sizeof(int) +i*sizeof(Golfista), ios::beg);
-        fichero.read((char*)&g, sizeof(Golfista));
-
->>>>>>> 793b1c8cd51409c26318e2a863de5c4055b5799c
         g.golpes=50+rand()%51;
         g.resultado=g.golpes-PAR;
         //Golfista
@@ -440,11 +410,8 @@ void Torneo:: Clasificar(){
         cout<<g.resultado<<endl;
     }
     cout<<"----------------------------------------------------------------------"<<endl;
-<<<<<<< HEAD
-
-=======
->>>>>>> 793b1c8cd51409c26318e2a863de5c4055b5799c
 }
+
 Torneo::~Torneo()
 {
     fichero.close();

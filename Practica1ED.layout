@@ -2,73 +2,17 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="Clasificacion.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Torneo.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-<<<<<<< HEAD
-			<Cursor1 position="12574" topLine="396" />
+			<Cursor1 position="11202" topLine="356" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Clasificacion.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5880" topLine="166" />
+			<Cursor1 position="46" topLine="51" />
 		</Cursor>
 	</File>
-	<File name="Torneo.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="986" topLine="22" />
-		</Cursor>
-	</File>
-	<File name="Clasificacion.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1997" topLine="40" />
-		</Cursor>
-=======
-			<Cursor1 position="658" topLine="5" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6975" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Clasificacion.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3049" topLine="32" />
-		</Cursor>
-		<Folding>
-			<Collapse line="6" />
-			<Collapse line="16" />
-			<Collapse line="47" />
-			<Collapse line="71" />
-			<Collapse line="91" />
-			<Collapse line="108" />
-		</Folding>
-	</File>
-	<File name="Torneo.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="11342" topLine="35" />
-		</Cursor>
-		<Folding>
-			<Collapse line="10" />
-			<Collapse line="17" />
-			<Collapse line="24" />
-			<Collapse line="31" />
-			<Collapse line="38" />
-			<Collapse line="45" />
-			<Collapse line="52" />
-			<Collapse line="59" />
-			<Collapse line="97" />
-			<Collapse line="164" />
-			<Collapse line="188" />
-			<Collapse line="226" />
-			<Collapse line="293" />
-			<Collapse line="321" />
-			<Collapse line="359" />
-			<Collapse line="418" />
-		</Folding>
->>>>>>> 793b1c8cd51409c26318e2a863de5c4055b5799c
-	</File>
-	<File name="Comun.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Comun.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="69" topLine="0" />
 		</Cursor>
