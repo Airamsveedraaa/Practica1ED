@@ -41,5 +41,6 @@ public:
     void modificar(Golfista c, int posicion);
     void eliminar(int posicion);
     void Clasificar();
+
 };
 #endif // TORNEO_H_INCLUDED

@@ -302,6 +302,7 @@ int main()
 
                     case 6:
                         {
+
                             t[OpcTorneo-1].Clasificar();
 
                             break;
