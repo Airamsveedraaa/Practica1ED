@@ -1,5 +1,9 @@
 # depslib dependency file v1.0
+<<<<<<< HEAD
 1745264975 source:c:\users\airam\desktop\practica1ed\clasificacion.cpp
+=======
+1744060063 source:c:\users\airam\desktop\practica1ed\clasificacion.cpp
+>>>>>>> 793b1c8cd51409c26318e2a863de5c4055b5799c
 	"Clasificacion.h"
 	<iostream>
 
@@ -8,7 +12,11 @@
 	"Clasificacion.h"
 	<iostream>
 
+<<<<<<< HEAD
 1745265012 source:c:\users\airam\desktop\practica1ed\torneo.cpp
+=======
+1744058993 source:c:\users\airam\desktop\practica1ed\torneo.cpp
+>>>>>>> 793b1c8cd51409c26318e2a863de5c4055b5799c
 	"Torneo.h"
 	"Clasificacion.h"
 	<cstring>
